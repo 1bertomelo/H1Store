@@ -10,7 +10,6 @@ namespace H1Store.Catalogo.Data.Providers.MongoDb.Collections
 	public class FornecedorCollection : Document
 	{
 		#region propriedades
-		
 
 		public string Nome { get;  set; }
 		public string Cnpj { get;  set; }

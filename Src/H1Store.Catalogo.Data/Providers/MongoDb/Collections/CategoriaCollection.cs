@@ -10,6 +10,7 @@ namespace H1Store.Catalogo.Data.Providers.MongoDb.Collections
 	public class CategoriaCollection : Document
 	{
 		#region 2 - Propriedades
+
 		public Guid CodigoId { get; set; }
 		public string Descricao { get; set; }
 		public bool Ativo { get; set; }
