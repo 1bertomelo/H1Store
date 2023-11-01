@@ -50,8 +50,10 @@ namespace H1Store.Catalogo.Data.Providers.MongoDb
 
 		public virtual TDocument FindOne(Expression<Func<TDocument, bool>> filterExpression)
 		{
-			return _collection.Find(filterExpression).FirstOrDefault();
+			return _collection.Find(filterExpression).FirstOrDefault();			
 		}
+
+		
 
 		public virtual Task<TDocument> FindOneAsync(Expression<Func<TDocument, bool>> filterExpression)
 		{

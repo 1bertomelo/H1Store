@@ -36,9 +36,15 @@ namespace H1Store.Catalogo.Data.Repository
 			throw new NotImplementedException();
 		}
 
-		public Task<Fornecedor> ObterPorCnpj(string cnpj)
+		public async Task<Fornecedor> ObterPorCnpj(string cnpj)
 		{
-			throw new NotImplementedException();
+			//var resultadoBuscaCnpj =  _fornecedorRepository.FilterBy(filtro => filtro.Cnpj == cnpj)
+			//	.FirstOrDefault();
+			//return _mapper.Map<Fornecedor>(resultadoBuscaCnpj);
+
+			var resultadoBuscaCnpj2 = _fornecedorRepository.FindOneAsync(filtro => filtro.Cnpj == cnpj);
+			return _mapper.Map<Fornecedor>(resultadoBuscaCnpj2);
+
 		}
 
 		public Task<Fornecedor> ObterPorId(int id)

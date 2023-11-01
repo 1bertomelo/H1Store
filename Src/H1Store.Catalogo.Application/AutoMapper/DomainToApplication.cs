@@ -14,6 +14,7 @@ namespace H1Store.Catalogo.Application.AutoMapper
 		public DomainToApplication()
 		{
 			CreateMap<Produto, ProdutoViewModel>();
+			CreateMap<Fornecedor, FornecedorViewModel>();
 		}
 	}
 }
