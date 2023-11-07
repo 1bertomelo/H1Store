@@ -16,19 +16,33 @@ namespace H1Store.Catalogo.Application.Services
 		private readonly IFornecedorRepository _fornecedorRepository;
 		private readonly IMapper _Mapper;
 
+		public FornecedorService(IFornecedorRepository fornecedorRepository, IMapper mapper)
+		{
+			_fornecedorRepository = fornecedorRepository;
+			_Mapper = mapper;
+		}
+
 		public async Task Adicionar(NovoFornecedorViewModel novoFornecedorViewModel)
 		{
+
 			//regra de negocio verificar aqui se existe cpnj ja cadastrado
 			//senao existir chama o repositoo
 			//se existir da erro que ja exist fornecedor cadastrado
-			
-			Fornecedor fornecedor = _Mapper.Map<Fornecedor>(novoFornecedorViewModel);
-			await _fornecedorRepository.Adicionar(fornecedor);
+			Fornecedor fornecedor = await _fornecedorRepository.ObterPorCnpj(novoFornecedorViewModel.Cnpj);
+
+			if (fornecedor != null)
+			{
+				throw new
+					ApplicationException(
+					"Cnpj já existe cadastrado em nossa base de dados, operação não pode ser realizada");
+			}
+			Fornecedor novoFornecedor = _Mapper.Map<Fornecedor>(novoFornecedorViewModel);
+			await _fornecedorRepository.Adicionar(novoFornecedor);
 		}
 
-		public Task<FornecedorViewModel> ObterPorCnpj(string cnpj)
+		public async Task<FornecedorViewModel> ObterPorCnpj(string cnpj)
 		{
-			throw new NotImplementedException();
+			return _Mapper.Map<FornecedorViewModel>(await _fornecedorRepository.ObterPorCnpj(cnpj));
 		}
 
 		public Task<FornecedorViewModel> ObterPorId(int id)
