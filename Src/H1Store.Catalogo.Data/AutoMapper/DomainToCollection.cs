@@ -17,6 +17,7 @@ namespace H1Store.Catalogo.Data.AutoMapper
 			CreateMap<Produto, ProdutoCollection>();
 			CreateMap<Categoria, CategoriaCollection>();
 			CreateMap<Fornecedor, FornecedorCollection>();
+			CreateMap<Usuario, UsuarioCollection>();
 		}
 	}
 }
