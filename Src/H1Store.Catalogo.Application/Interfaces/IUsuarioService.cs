@@ -10,7 +10,7 @@ namespace H1Store.Catalogo.Application.Interfaces
 {
 	public interface IUsuarioService
 	{
-		public Task<bool> Autenticar(AutenticarUsuarioViewModel);
+		public Task<string> Autenticar(AutenticarUsuarioViewModel autenticarUsuarioViewModel);
 		public Task Cadastrar(UsuarioViewModel usuario);
 	}
 }

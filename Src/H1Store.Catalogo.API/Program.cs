@@ -10,6 +10,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using H1Store.Catalogo.Data.AutoMapper;
 using H1Store.Catalogo.Infra.EmailService;
+using Microsoft.Extensions.Configuration;
+using H1Store.Catalogo.Infra.Autenticacao.Models;
+using H1Store.Catalogo.Infra.Autenticacao;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,8 +37,18 @@ builder.Services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>)
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 
+builder.Services.Configure<Token>(
+	builder.Configuration.GetSection("token"));
+
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
 builder.Services.Configure<EmailConfig>(
 	builder.Configuration.GetSection("EmailConfig"));
+
 
 
 var app = builder.Build();
